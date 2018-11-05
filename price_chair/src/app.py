@@ -8,3 +8,10 @@ content = request.content
 soup = BeautifulSoup(content,"html.parser")
 element = soup.find("span",{"id":"priceblock_ourprice","class":"a-size-medium a-color-price"},recursive=True)
 string_price = element.text.strip()
+price = float(string_price[1:])
+
+if price < 60:
+    print("Buy the chair")
+    print("The current price is {}".format(string_price))
+else:
+    print("Don't buy the chair")
