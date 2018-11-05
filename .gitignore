@@ -1,0 +1,7 @@
+*.pdf
+my_env/
+*/my_env/
+.vscode
+*/.vscode
+.vscode/
+*/.vscode/

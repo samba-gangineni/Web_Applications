@@ -1,0 +1,16 @@
+{
+    "student":[
+        {
+            "name":"samba",
+            "mark" : 70
+        },
+        {
+            "name":"samba",
+            "mark" : 70
+        },
+        {
+            "name":"samba",
+            "mark" : 70
+        }
+    ]
+}
