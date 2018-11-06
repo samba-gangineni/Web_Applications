@@ -1,6 +1,6 @@
 from src.common.database import Database
 from src.models.blog import Blog
-from src.models.post import Post
+from flask import session
 import uuid
 from datetime import datetime as dt
 
@@ -12,7 +12,7 @@ class User(object):
         self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id
         
-    # We wont yet have the user aobject created hence it is a class method.    
+    # We wont yet have the user object created hence it is a class method.    
     @classmethod
     def get_by_email(cls, email):
         data = Database.find_one("users",{"email":self.email})
@@ -49,7 +49,7 @@ class User(object):
 
     @staticmethod
     def logout():
-        session['email']=None
+        session['email'] = None
         
 
     def get_blogs(self):
