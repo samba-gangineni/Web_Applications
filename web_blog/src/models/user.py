@@ -1,6 +1,6 @@
 from datetime import datetime as dt
-from database import Database
-from blog import Blog
+from .database import Database
+from .blog import Blog
 from flask import session
 import uuid
 

@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime as dt
-from post import Post
-from database import Database
+from .post import Post
+from .database import Database
 
 __author__ = "Sambasiva Rao Gangineni"
 
