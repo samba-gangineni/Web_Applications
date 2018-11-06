@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block navigation %}
+    {% if {{ condition }}%}
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+    {% else %}
+        <li><a href="/logout">Logout</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content%}
+    <h1>{{ message }}</h1>
+{% endblock %}

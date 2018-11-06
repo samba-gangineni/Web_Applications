@@ -9,7 +9,7 @@ app.secret_key = "samba"
 
 @app.route('/')
 def home_template():
-    return render_template('home.html')
+    return render_template('home.html',message="Welcome to the Web development Blog",condition=True if session['email'] is None else False)
 
 @app.route('/login') #www.examplesite.com/api/
 def login_template():
@@ -48,6 +48,11 @@ def register_user():
     User.register(email,password)
  
     return render_template("profile.html", email=session['email'].split('@')[0] if session['email'] is not None and '@' in session['email'] else session['email'])
+
+@app.route('/logout')
+def logout_template():
+    session['email']=None
+    return render_template("logout.html", message="Successfully Logged Out")
 
 if __name__ == "__main__":
     app.run()
