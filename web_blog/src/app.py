@@ -15,6 +15,10 @@ def home_template():
 def login_template():
     return render_template('login.html')
 
+@app.route('/login/<x>') #www.examplesite.com/api/
+def login_templates(x):
+    return render_template('login.html',message=x)
+
 @app.route('/register')
 def register_templates(x="Join Us!"):
     return render_template('register.html', message=x)
@@ -34,10 +38,14 @@ def login_user():
 
     if User.login_valid(email,password):
         User.login(email)
+    elif User.get_by_email(email) is None:
+        session['email']=None
+        register_template(x="Account does not exists. Please Create an account.")
+        return redirect(url_for('register_template',x="Account does not exists. Please Create an account."))
     else:
         session['email']=None
-        register_template(x="Email does not exsists! Register here")
-        return redirect(url_for('register_template',x="Email does not exsists! Register here"))
+        login_templates(x="Authentication failed! Please try again")
+        return redirect(url_for('login_templates',x="Authentication failed! Please try again"))
     
     return render_template("profile.html", email=session['email'].split('@')[0] if session['email'] is not None and '@' in session['email'] else session['email'])
 
@@ -50,7 +58,7 @@ def register_user():
         return render_template("profile.html", email=session['email'].split('@')[0] if '@' in session['email'] else session['email'])
     else:
         register_template(x="Email already exsists! Login or try with other email ")
-        return redirect(url_for(register_template,x="Email already exsists! Login or try with other email"))    
+        return redirect(url_for("register_template",x="Email already exsists! Login or try with other email"))    
      
 
 @app.route('/logout')
