@@ -21,7 +21,7 @@ class User(object):
             return cls(**data)
     
     @classmethod
-    def get_by_id(self, _id):
+    def get_by_id(cls, _id):
         data = Database.find_one("users",{"_id":_id})
         if data is not None:
             return cls(**data)
@@ -34,7 +34,7 @@ class User(object):
         return False
 
     @classmethod
-    def register(email,password):
+    def register(cls,email,password):
         user = cls.get_by_email(email)
         if user is None:
             new_user = cls(email,password)
