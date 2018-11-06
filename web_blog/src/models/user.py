@@ -1,5 +1,5 @@
-from src.common.database import Database
-from src.models.blog import Blog
+from srcs.common.database import Database
+from srcs.models.blog import Blog
 from flask import session
 import uuid
 from datetime import datetime as dt
@@ -7,7 +7,7 @@ from datetime import datetime as dt
 __author__ = 'Sambasiva Rao Gangineni'
 
 class User(object):
-    def __init__(self,email, password _id=None):
+    def __init__(self,email, password, _id=None):
         self.email = email
         self.password = password
         self._id = uuid.uuid4().hex if _id is None else _id
