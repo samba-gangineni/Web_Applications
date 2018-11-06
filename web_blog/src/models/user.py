@@ -1,4 +1,5 @@
 from src.common.database import Database
+from src.models.blog import Blog
 import uuid
 
 __author__ = 'Sambasiva Rao Gangineni'
@@ -35,19 +36,29 @@ class User(object):
         if user is None:
             new_user = cls(email,password)
             new_user.save_to_mongo()
+            session['email'] = email
             return True
         else:
             return False
         
+    @staticmethod
+    def login(user_email):
+        session['email'] = user_email
 
-    def login(self):
-        pass
+    @staticmethod
+    def logout():
+        session['email']=None
+        
 
     def get_blogs(self):
-        pass
+        return Blog.find_by_author_id(self._id)
 
     def json(self):
-        pass
+        return {
+            "email":self.email,
+            "_id":self._id,
+            "password":self.password
+        }
 
     def save_to_mongo(self):
-        pass
+        Database.insert("users",self.json())
