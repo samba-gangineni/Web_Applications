@@ -1,5 +1,5 @@
 import uuid
-from common.database import Database
+from src.common.database import Database
 from datetime import datetime as dt
 
 __author__ = 'Sambasiva Rao Gangineni'
@@ -7,13 +7,13 @@ __author__ = 'Sambasiva Rao Gangineni'
 class Post(object):
     
     #Properties each post have
-    def __init__(self,blog_id, title,content,author, date = dt.utcnow(), id=None):
+    def __init__(self,blog_id, title,content,author, created_date = dt.utcnow(), _id=None):
         self.blog_id = blog_id
         self.title = title
         self.content = content
         self.author = author
-        self.id = uuid.uuid4().hex if id is None else id
-        self.created_date = date
+        self._id = uuid.uuid4().hex if _id is None else _id
+        self.created_date = created_date
 
     #Saving the post to database 
     def save_to_mongo(self):
@@ -22,7 +22,7 @@ class Post(object):
     #This creates the json represntaiton of the post
     def json(self):
         return {
-            'id':self.id,
+            '_id':self._id,
             'blog_id':self.blog_id,
             'author' : self.author,
             'content' : self.content,
@@ -33,12 +33,7 @@ class Post(object):
     @classmethod
     def from_mongo(cls , id):
         post_data = Database.find_one(collection='posts',query={'id':id})
-        return cls(blog_id = post_data['blog_id'], 
-                    title = post_data['title'],
-                    content=post_data['content'],
-                    author=post_data['author'], 
-                    date = post_data['date'], 
-                    id=post_data['id'])
+        return cls(**post_data)
     @staticmethod
     def from_blog(id):
         return [post for post in Database.find(collection='posts',query={'blog_id':id})]
