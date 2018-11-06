@@ -36,8 +36,8 @@ def login_user():
         User.login(email)
     else:
         session['email']=None
-        register_template(x="User does not exsists! Register here")
-        return redirect(url_for('register_template',x="User does not exsists! Register here"))
+        register_template(x="Email does not exsists! Register here")
+        return redirect(url_for('register_template',x="Email does not exsists! Register here"))
     
     return render_template("profile.html", email=session['email'].split('@')[0] if session['email'] is not None and '@' in session['email'] else session['email'])
 
@@ -46,8 +46,12 @@ def register_user():
     email = request.form['email']
     password = request.form['password']
     User.register(email,password)
- 
-    return render_template("profile.html", email=session['email'].split('@')[0] if session['email'] is not None and '@' in session['email'] else session['email'])
+    if session['email'] is not None:
+        return render_template("profile.html", email=session['email'].split('@')[0] if '@' in session['email'] else session['email'])
+    else:
+        register_template(x="Email already exsists! Login or try with other email ")
+        return redirect(url_for(register_template,x="Email already exsists! Login or try with other email"))    
+     
 
 @app.route('/logout')
 def logout_template():
