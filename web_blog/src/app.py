@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session
-from srcs.models.user import User
+from models.user import User
 
 __author__ = 'Sambasiva Rao Gangineni'
 

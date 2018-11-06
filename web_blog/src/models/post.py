@@ -1,5 +1,5 @@
 import uuid
-from srcs.common.database import Database
+from database import Database
 from datetime import datetime as dt
 
 __author__ = 'Sambasiva Rao Gangineni'

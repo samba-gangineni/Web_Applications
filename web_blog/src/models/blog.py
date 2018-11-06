@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime as dt
-from srcs.models.post import Post
-from srcs.common.database import Database
+from post import Post
+from database import Database
 
 __author__ = "Sambasiva Rao Gangineni"
 

@@ -1,8 +1,9 @@
-from srcs.common.database import Database
-from srcs.models.blog import Blog
+from datetime import datetime as dt
+from database import Database
+from blog import Blog
 from flask import session
 import uuid
-from datetime import datetime as dt
+
 
 __author__ = 'Sambasiva Rao Gangineni'
 
