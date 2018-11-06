@@ -1,4 +1,19 @@
 #login-form{
     margin-top:25px;
-    
+
+}
+
+.page-form{
+    max-width: 480px;
+}
+label{
+    display: block;
+}
+label[for="login-form"]{
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    size: 10px;
 }

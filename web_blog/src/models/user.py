@@ -16,7 +16,7 @@ class User(object):
     # We wont yet have the user object created hence it is a class method.    
     @classmethod
     def get_by_email(cls, email):
-        data = Database.find_one("users",{"email":self.email})
+        data = Database.find_one("users",{"email":email})
         if data is not None:
             return cls(**data)
     
