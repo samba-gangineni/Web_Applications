@@ -9,7 +9,11 @@ app.secret_key = "samba"
 
 @app.route('/')
 def home_template():
-    return render_template('home.html',message="Welcome to the Web development Blog",condition=True if session['email'] is None else False)
+    try:
+        cookie = session['email']
+    except:
+        cookie = None
+    return render_template('home.html',message="Welcome to the Web development Blog",condition=True if cookie is None else False)
 
 @app.route('/login') #www.examplesite.com/api/
 def login_template():
@@ -57,7 +61,7 @@ def register_user():
     if session['email'] is not None:
         return render_template("profile.html", email=session['email'].split('@')[0] if '@' in session['email'] else session['email'])
     else:
-        register_template(x="Email already exsists! Login or try with other email ")
+        register_template(x="Email already exists! Login or try with other email ")
         return redirect(url_for("register_template",x="Email already exsists! Login or try with other email"))    
      
 
